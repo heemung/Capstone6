@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "AllUserTasksView";
+    ViewBag.Title = "UserTasksView";
 }
 
-<h2>AllUserTasksView</h2>
+<h2>UserTasksView</h2>
 
 <table class="table table-bordered table-responsive table-hover">
     @*table style and below are table headers*@
@@ -15,14 +15,14 @@
         <th>Owner</th>
     </tr>
     @*from the viewbag in ______ gets all the tasks from the table*@
-    @foreach (var theUsersTasks in ViewBag.AllTasks)
+    @foreach (var idTasks in ViewBag.theUserTasks)
     {
         <tr>
-            <td>@theUsersTasks.taskID</td>
-            <td>@theUsersTasks.description</td>
-            <td>@theUsersTasks.date</td>
-            <td>@theUsersTasks.isComplete</td>
-            <td>@theUsersTasks.userID</td>
+            <td>@idTasks.taskID</td>
+            <td>@idTasks.description</td>
+            <td>@idTasks.date</td>
+            <td>@idTasks.isComplete</td>
+            <td>@idTasks.userID</td>
             <td>
                 <a href="/Home/!!!!!NEEDSNAME!!!!!!">Delete</a> @*view actions in home controller*@
                 <a href="/Home/!!!!!NEEDSNAME!!!!!!">Complete Task</a>
@@ -30,5 +30,3 @@
         </tr>
     }
 </table>
-
-<p><a href="/Home/!!!!!NEEDSNAME!!!!!!">Log Out</a></p>@*Sean, do we need link to log out*@

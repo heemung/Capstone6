@@ -27,23 +27,35 @@ namespace Capstone6.Controllers
 
             return View();
         }
-
-        public ActionResult AllUserTasks(Task getTasks)
+        public ActionResult UserTasksView()
         {
-
             //1. get database
             Capstone6Entities ormList = new Capstone6Entities();
 
-            //2.load items into viewbag matching userid
-            ViewBag.theUsersTasks = ormList.Tasks.Where(u => u.userID == getTasks.userID).ToString();
+            //2. Get user id
+            User selectUser = ormList.Users.Find(1);
 
+            //3.load items into viewbag matching userid
+
+            ViewBag.theUserTasks = ormList.Tasks.Where(x => x.userID == selectUser.userID).ToList();
 
             //3.return view
             return View();
         }
+
+        //for testing purposes
         public ActionResult AllUserTasksView()
         {
+            //1. get database
+            Capstone6Entities ormListTask = new Capstone6Entities();
 
+            //3.load items into viewbag matching userid
+
+            ViewBag.AllTasks = ormListTask.Tasks.ToList();
+
+            //ViewBag.theUsersTasks = ormList.Tasks.Where(u => u.userID == getTasks.userID).ToString();
+
+            //3.return view
             return View();
         }
     }
