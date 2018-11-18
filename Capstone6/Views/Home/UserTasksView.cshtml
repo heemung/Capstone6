@@ -13,6 +13,7 @@
         <th>Date </th>
         <th>Completed</th>
         <th>Owner</th>
+        <th>Delete</th>
     </tr>
     @*from the viewbag in ______ gets all the tasks from the table*@
     @foreach (var idTasks in ViewBag.theUserTasks)
@@ -21,7 +22,13 @@
             <td>@idTasks.taskID</td>
             <td>@idTasks.description</td>
             <td>@idTasks.date</td>
-            <td>@idTasks.isComplete</td>
+            <td>
+                @idTasks.isComplete
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                    </td>
             <td>@idTasks.userID</td>
             <td>
                 <a href="/Home/!!!!!NEEDSNAME!!!!!!">Delete</a> @*view actions in home controller*@

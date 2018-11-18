@@ -43,6 +43,26 @@ namespace Capstone6.Controllers
             return View();
         }
 
+        public ActionResult UserTaskDelete(Task deleteItem)
+        {
+
+            //1. create ORM
+            Capstone6Entities ORMtask = new Capstone6Entities();
+
+            //2. get old item
+            Task getItem = ORMtask.Tasks.Find(deleteItem.taskID); // use edit item name to find old item
+
+            //4. push to DB
+
+            ORMtask.Entry(getItem).State = System.Data.Entity.EntityState.Deleted;
+            ORMtask.SaveChanges();
+
+            //5. return to the list of item
+            return RedirectToAction("UserTasksView"); // action to action instead of action to view
+
+
+        }
+
         //for testing purposes
         public ActionResult AllUserTasksView()
         {
