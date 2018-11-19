@@ -7,7 +7,7 @@ namespace Capstone6.Models
     {
         [Required]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -43,7 +43,7 @@ namespace Capstone6.Models
     {
         [Required]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
     }
 
     public class LoginViewModel
@@ -51,12 +51,12 @@ namespace Capstone6.Models
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
@@ -67,13 +67,17 @@ namespace Capstone6.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string name { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
@@ -86,13 +90,13 @@ namespace Capstone6.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
@@ -107,6 +111,6 @@ namespace Capstone6.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
     }
 }
