@@ -27,6 +27,65 @@ namespace Capstone6.Controllers
 
             return View();
         }
+
+        public ActionResult AddTask()
+        {
+
+            return View();
+        }
+
+        public ActionResult AddNew(Task newTask)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Capstone6Entities ORMtask = new Capstone6Entities();
+
+                    var searchDup = ORMtask.Tasks.Where(x => x.taskID == newTask.taskID).SingleOrDefault();
+
+                    if (searchDup == null)
+                    {
+                        ORMtask.Entry(newTask).State = System.Data.Entity.EntityState.Added;
+                        ORMtask.SaveChanges();
+
+                        ViewBag.AllItems = ORMtask.Tasks.ToList<Task>();
+                        return RedirectToAction("UserTasksView");
+                    }
+                    else
+                    {
+                        ViewBag.WhereError = "Task ID Already in database";
+                        return View("Error");
+                    }
+                }
+                else
+                {
+                    ViewBag.WhereError = "Model State Not Vaild";
+                    return View("Error");
+
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.WhereError = "Exception Error in Add Item";
+                return View("Error");
+            }
+        }
+    
+        public ActionResult AddTaskActions()
+        {
+            //creating the ORM
+            Capstone6Entities ORMAddtask = new Capstone6Entities();
+
+            ViewBag.AddTask = ORMAddtask.Tasks.ToList(); // use edit item name to find old item
+
+
+            ORMAddtask.SaveChanges();
+
+
+            return RedirectToAction("UserTasksView");
+        }
+
         public ActionResult UserTasksView()
         {
             //1. get database
