@@ -11,6 +11,12 @@ namespace Capstone6.Controllers
     {
         public ActionResult Index()
         {
+            Capstone6Entities ORMuser = new Capstone6Entities();
+            var userList = ORMuser.Users.ToList();
+
+            //put user db list into select list for dropdown list
+            ViewBag.allUsers = new SelectList(userList, "userID", "name");
+
             return View();
         }
 
@@ -71,34 +77,21 @@ namespace Capstone6.Controllers
                 return View("Error");
             }
         }
-    
-        public ActionResult AddTaskActions()
-        {
-            //creating the ORM
-            Capstone6Entities ORMAddtask = new Capstone6Entities();
 
-            ViewBag.AddTask = ORMAddtask.Tasks.ToList(); // use edit item name to find old item
-
-
-            ORMAddtask.SaveChanges();
-
-
-            return RedirectToAction("UserTasksView");
-        }
-
-        public ActionResult UserTasksView()
+        public ActionResult UserTasksView(int currentUser)
         {
             //1. get database
             Capstone6Entities ormList = new Capstone6Entities();
 
             //2. Get user id
-            User selectUser = ormList.Users.Find(1);
+            User selectUser = ormList.Users.Find(currentUser);
 
             //3.load items into viewbag matching userid
 
             ViewBag.theUserTasks = ormList.Tasks.Where(x => x.userID == selectUser.userID).ToList();
 
             //3.return view
+            ViewBag.Current = currentUser;
             return View();
         }
 
@@ -113,12 +106,12 @@ namespace Capstone6.Controllers
             //3. change item
             getItem.isComplete = true;
             //4. push to DB
-
+            int currentUser = getItem.userID;
             ORMtask.Entry(getItem).State = System.Data.Entity.EntityState.Modified;
             ORMtask.SaveChanges();
 
             //5. return to the list of item
-            return RedirectToAction("UserTasksView"); // action to action instead of action to view
+            return RedirectToAction("UserTasksView",getItem.userID); // action to action instead of action to view
 
         }
 
