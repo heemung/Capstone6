@@ -26,12 +26,11 @@
             </td>
             <td>
                 @idTasks.isComplete
-                <a href="/Home/UserTaskComplete?whichTasks=@idTasks.taskID" class="btn-danger btn-sm" name="complete">Completed</a>
-                <a href="/Home/UserTaskNotComplete?whichTasks=@idTasks.taskID" class="btn-danger btn-sm" name="notcomplete">Not Completed</a>
+                <a href="/Home/UserTaskComplete?whichTasks=@idTasks.taskID&currentUser=@idTasks.userID" class="btn-danger btn-sm" name="complete">Completed</a>
+                <a href="/Home/UserTaskNotComplete?whichTasks=@idTasks.taskID&currentUser=@idTasks.userID" class="btn-danger btn-sm" name="notcomplete">Not Completed</a>
             </td>
             <td>@idTasks.userID</td>
-            <td><a href="/Home/UserTaskDelete?deleteItem=@idTasks.taskID" onclick="return confirm('Are you sure you want to delete this task?')" class="btn-danger btn-sm" name="delete">Delete Task</a></td>
+            <td><a href="/Home/UserTaskDelete?deleteItem=@idTasks.taskID&currentUser=@idTasks.userID" onclick="return confirm('Are you sure you want to delete this task?')" class="btn-danger btn-sm" name="delete">Delete Task</a></td>
         </tr>
     }
 </table>
-ViewBag.Current

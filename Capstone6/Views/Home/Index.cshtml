@@ -4,7 +4,8 @@
 
 <ul>
     <li><h1><a href="/Home/AllUserTasksView" style="color:forestgreen">All Task Test</a></h1></li>
-    <li><h1><a href="/Home/UserTasksView" style="color:forestgreen">User Task Test</a></h1></li>
+    @*<li><h1><a href="/Home/UserTasksView" style="color:forestgreen">User Task Test</a></h1></li>*@
     <li><h1><a href="/Home/AddTask" style="color:forestgreen">Add Task</a></h1></li>
 </ul>
-@Html.DropDownList("allUsers",null,new { onchange = "document.location.href='/Home/UserTasksView?currentUser='+this.value;" } )
+
+<h1><p style="color:forestgreen">Select User <span >@Html.DropDownList("allUsers", null, new { onchange = "document.location.href='/Home/UserTasksView?currentUser='+this.value;" })</span></p></h1>

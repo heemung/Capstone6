@@ -91,32 +91,31 @@ namespace Capstone6.Controllers
             ViewBag.theUserTasks = ormList.Tasks.Where(x => x.userID == selectUser.userID).ToList();
 
             //3.return view
-            ViewBag.Current = currentUser;
             return View();
         }
 
-        public ActionResult UserTaskComplete(int whichTasks)
+        public ActionResult UserTaskComplete(int whichTasks, int currentUser)
         {
+            int numberToReturn = currentUser;
             //1. create ORM
             Capstone6Entities ORMtask = new Capstone6Entities();
 
             //2. find item
             Task getItem = ORMtask.Tasks.Find(whichTasks); // use edit item name to find old item
-
             //3. change item
             getItem.isComplete = true;
             //4. push to DB
-            int currentUser = getItem.userID;
             ORMtask.Entry(getItem).State = System.Data.Entity.EntityState.Modified;
             ORMtask.SaveChanges();
 
             //5. return to the list of item
-            return RedirectToAction("UserTasksView",getItem.userID); // action to action instead of action to view
+            return RedirectToAction("UserTasksView",new {currentUser = numberToReturn }); // action to action instead of action to view
 
         }
 
-        public ActionResult UserTaskNotComplete(int whichTasks)
+        public ActionResult UserTaskNotComplete(int whichTasks, int currentUser)
         {
+            int numberToReturn = currentUser;
             //1. create ORM
             Capstone6Entities ORMtask = new Capstone6Entities();
 
@@ -131,12 +130,12 @@ namespace Capstone6.Controllers
             ORMtask.SaveChanges();
 
             //5. return to the list of item
-            return RedirectToAction("UserTasksView"); // action to action instead of action to view
+            return RedirectToAction("UserTasksView", new { currentUser = numberToReturn }); // action to action instead of action to view
 
         }
-        public ActionResult UserTaskDelete(int deleteItem)
+        public ActionResult UserTaskDelete(int deleteItem, int currentUser)
         {
-
+            int numberToReturn = currentUser;
             //1. create ORM
             Capstone6Entities ORMtask = new Capstone6Entities();
 
@@ -149,7 +148,7 @@ namespace Capstone6.Controllers
             ORMtask.SaveChanges();
 
             //5. return to the list of item
-            return RedirectToAction("UserTasksView"); // action to action instead of action to view
+            return RedirectToAction("UserTasksView", new { currentUser = numberToReturn }); // action to action instead of action to view
 
         }
 
